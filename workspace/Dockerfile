@@ -1,10 +1,10 @@
-FROM ubuntu:14.04.5
-MAINTAINER Cloud9 IDE, inc. <info@c9.io>
+FROM ubuntu:18.04.1
+LABEL maintainer="Cloud9 IDE, inc. <info@c9.io>"
 
 ENV DEBIAN_FRONTEND noninteractive
 
 # increment version to force flushing the cache
-RUN echo "Version 1.13"
+RUN echo "Version 1.14"
 
 # Set mirrors to automatic based off location
 RUN apt-get update --fix-missing
@@ -142,8 +142,8 @@ RUN echo "Configure apache2" && \
 RUN echo "Configure php" && \
     /etc/init.d/mysql start && \
     /etc/init.d/postgresql start && \
-    apt-get install -y php5 php5-cli php5-fpm php5-pgsql php5-mysql phpmyadmin phppgadmin && \
-    php5enmod c9 && \
+    apt-get install -y php7.2 php7.2-cli php7.2-fpm php7.2-pgsql php7.2-mysql phpmyadmin phppgadmin && \
+    php7.2enmod c9 && \
     chmod 777 /var/lib/phpmyadmin/tmp && \
     cd /etc/php5/mods-available && ls *.ini | sed 's/\.ini$//' | xargs php5enmod && \
     curl -sS https://getcomposer.org/installer | php && \
